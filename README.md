@@ -1,38 +1,59 @@
-Role Name
+Ansible-Role-IPv6
 =========
 
-A brief description of the role goes here.
+Configures IPv6 networking as documented on [OVH documentation](http://docs.ovh.ca/en/guides-network-ipv6.html)
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+* Ubuntu
+* IPv6 capabilities
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+ipv6_address: The actual IPv6 address (eg: ::1)
+ipv6_netmask: Netmask for IPv6
+ipv6_gateway: The gateway (eg: ::1)
+ipv6_interface: The interface to confiure (eg. eth0)
+
+All variables are required
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+(No dependencies)
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Variables are better placed in `host_vars` as IP-addresses are unique to hosts
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```
+# playbook-dir/host_vars/localhost.yml
+
+ipv6_address: ::1
+ipv6_netmask: 128
+ipv6_gateway: ::1
+ipv6_interface: eth0
+```
+
+```
+# playbook-dir/playbook.yml
+
+- hosts: localhost
+  roles:
+   - { role: jeroened.ipv6 }
+```
+
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Contributors:
+- Jeroen "JeroenED" De Meerleer <me@jeroened.be> (maintainer)
