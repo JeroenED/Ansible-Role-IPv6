@@ -1,0 +1,5 @@
+---
+# tasks file for ansible-role-ipv6
+
+- include: "tasks-{{ ansible_os_family }}.yml"
+  static: no
