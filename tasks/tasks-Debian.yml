@@ -1,0 +1,12 @@
+---
+# Configure IPv6 on ubuntu
+
+- name: Configure IPv6
+  template:
+    src: "ubuntu.j2"
+    dest: "/etc/network/interfaces.d/10-ipv6"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart network
+  when: ipv6_interface is defined

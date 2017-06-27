@@ -1,0 +1,7 @@
+iface {{ ipv6_interface }} inet6 static
+address {{ ipv6_address }}
+netmask {{ ipv6_netmask }}
+post-up /sbin/ip -6 route add {{ ipv6_gateway }} dev {{ ipv6_interface }}
+post-up /sbin/ip -6 route add default via {{ ipv6_gateway }} dev {{ ipv6_interface }}
+pre-down /sbin/ip -6 route del default via {{ ipv6_gateway }} dev {{ ipv6_interface }}
+pre-down /sbin/ip -6 route del {{ ipv6_gateway }} dev {{ ipv6_interface }}
